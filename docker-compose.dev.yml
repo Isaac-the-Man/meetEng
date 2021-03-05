@@ -1,0 +1,39 @@
+version: "3"
+services:
+  frontend:
+    build:
+      context: "frontend"
+      dockerfile: "Dockerfile.dev.dockerfile"
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    stdin_open: true
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - "./frontend/public:/app/public"
+      - "./frontend/src:/app/src"
+  backend:
+    build:
+      context: "backend"
+      dockerfile: "Dockerfile.dev.dockerfile"
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./backend/main.js:/app/main.js"
+      - "./backend/config.json:/app/config.json"
+  db:
+    image: "mongo"
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+      - mongoconfig:/data/configdb
+volumes:
+  mongodata:
+    external: false
+  mongoconfig:
+    external: false
