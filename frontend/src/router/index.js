@@ -12,7 +12,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/formSenior',
+    path: '/form/upperclassmen',
     name: 'FormSenior',
     component: FormSenior
   }
