@@ -39,7 +39,7 @@
             <app-time-block-picker @count="writeCount" @data="writeData"
                                    id="input-senior-timeblocks"></app-time-block-picker>
           </b-form-group>
-          <b-button block type="submit" variant="primary">Submit</b-button>
+          <b-button squared class="button-red" block type="submit" variant="danger">Submit</b-button>
         </b-form>
         <pre>{{ formData }}</pre>
       </b-col>
@@ -425,5 +425,11 @@ export default {
 </script>
 
 <style scoped>
+.button-red {
+  background-color: #d6001c;
+}
 
+.button-red:hover {
+  background-color: #ab2328;
+}
 </style>
