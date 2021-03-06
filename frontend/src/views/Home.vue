@@ -29,8 +29,4 @@ export default {
 
 <style scoped>
 @import "../assets/styles/main.css";
-.rpi-logo {
-  max-width: 240px;
-  max-height: 240px;
-}
 </style>

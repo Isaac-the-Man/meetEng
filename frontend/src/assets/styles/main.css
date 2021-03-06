@@ -6,3 +6,7 @@
     background-color: #ab2328 !important;
     border-color: #ab2328 !important;
 }
+.rpi-logo {
+    max-width: 240px;
+    max-height: 240px;
+}
