@@ -2,7 +2,7 @@
   <b-container>
     <b-row>
       <b-col>
-        <h1>Form Senior</h1>
+        <h1>Upperclassmen Sign Up</h1>
         <hr>
         <b-form>
           <b-form-group label="First Name:" label-for="input-senior-firstname">
@@ -39,7 +39,7 @@
             <app-time-block-picker @count="writeCount" @data="writeData"
                                    id="input-senior-timeblocks"></app-time-block-picker>
           </b-form-group>
-          <b-button squared class="button-red" block type="submit" variant="danger">Submit</b-button>
+          <b-button squared class="button-red" block type="submit">Submit</b-button>
         </b-form>
         <pre>{{ formData }}</pre>
       </b-col>
@@ -425,11 +425,5 @@ export default {
 </script>
 
 <style scoped>
-.button-red {
-  background-color: #d6001c;
-}
-
-.button-red:hover {
-  background-color: #ab2328;
-}
+@import "../assets/styles/main.css";
 </style>
