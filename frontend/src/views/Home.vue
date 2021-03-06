@@ -12,8 +12,8 @@
           Fill out a form to participate!
         </p>
         <div>
-          <b-button squared to="/form/signup" class="mr-1 button-red">Prospective Students</b-button>
-          <b-button squared to="/form/signup" class="mr-1 button-red">Freshmen</b-button>
+          <b-button squared to="/form/signup?type=prospective" class="mr-1 button-red">Prospective Students</b-button>
+          <b-button squared to="/form/signup?type=freshmen" class="mr-1 button-red">Freshmen</b-button>
           <b-button squared to="/form/upperclassmen" class="ml-1" variant="dark">Upperclassmen</b-button>
         </div>
       </b-col>
