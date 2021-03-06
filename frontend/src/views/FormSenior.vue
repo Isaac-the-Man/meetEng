@@ -29,15 +29,6 @@
           <b-form-group label="Hometown:" label-for="input-senior-hometown">
             <b-form-select v-model="formData.hometown" id="input-senior-hometown" :options="statesOptions"></b-form-select>
           </b-form-group>
-          <b-form-group label="Clubs:" label-for="input-senior-clubs" v-slot="{ ariaDescribedby }">
-            <b-form-checkbox-group
-                id="input-senior-clubs"
-                v-model="formData.clubs"
-                :options="clubsOptions"
-                :aria-describedby="ariaDescribedby"
-                name="clubs-list"
-            ></b-form-checkbox-group>
-          </b-form-group>
           <b-form-group label="Time Blocks:" label-for="input-senior-timeblocks">
             <app-time-block-picker @count="writeCount" @data="writeData" id="input-senior-timeblocks"></app-time-block-picker>
           </b-form-group>
@@ -65,7 +56,6 @@ export default {
         gender: '',
         majors: [],
         hometown: '',
-        clubs: [],
         availability: {}
       },
       genderOptions: [
@@ -75,14 +65,18 @@ export default {
         {text: 'Others', value: 'o'}
       ],
       majorsOptions: [
-        {text: 'Applied Physics', value: 'as'},
-        {text: 'Biology', value: 'bs'},
-        {text: 'Computer Science', value: 'cs'}
-      ],
-      clubsOptions: [
-        {text: 'The Forge', value: 'the-forge'},
-        {text: 'RPISEC', value: 'rpisec'},
-        {text: 'RPI Flying Club', value: 'rpi-flying-club'}
+        {text: 'Aeronautical Engineering', value: 'aeronautical-engineering'},
+        {text: 'Biomedical Engineering', value: 'biomedical-engineering'},
+        {text: 'Chemical Engineering', value: 'chemical-engineering'},
+        {text: 'Civil Engineering', value: 'civil-engineering'},
+        {text: 'Computer & Systems Engineering', value: 'computer-systems-engineering'},
+        {text: 'Electrical Engineering', value: 'electrical-engineering'},
+        {text: 'Environmental Engineering', value: 'environmental-engineering'},
+        {text: 'Industrial and Management Engineering', value: 'industrial-and-management-engineering'},
+        {text: 'Materials Engineering', value: 'materials-engineering'},
+        {text: 'Mechanical Engineering', value: 'mechanical-engineering'},
+        {text: 'Nuclear Engineering', value: 'nuclear-engineering'},
+        {text: 'Undeclared Engineering', value: 'undeclared-engineering'}
       ],
       statesOptions: [
         {
