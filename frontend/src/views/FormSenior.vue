@@ -70,7 +70,7 @@ export default {
         {text: 'Please select an option', value: ''},
         {text: 'Male', value: 'm'},
         {text: 'Female', value: 'f'},
-        {text: 'Others', value: 'o'}
+        {text: 'Non-Binary', value: 'o'}
       ],
       majorsOptions: [
         {text: 'Aeronautical Engineering', value: 'aeronautical-engineering'},
