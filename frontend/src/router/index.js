@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import FormSenior from '@/views/FormSenior';
-import FormFreshmen from "@/views/FormFreshmen";
+import FormFreshmen from '@/views/FormFreshmen';
+import AdminLogin from '@/views/AdminLogin';
 import PageNotFound from '@/views/PageNotFound';
 
 Vue.use(VueRouter)
@@ -22,6 +23,11 @@ const routes = [
     path: '/form/signup',
     name: 'FormFreshmen',
     component: FormFreshmen
+  },
+  {
+    path: '/admin-login',
+    name: 'AdminLogin',
+    component: AdminLogin
   },
   {
     path: '*',
