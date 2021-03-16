@@ -16,7 +16,7 @@
           <b-button squared to="/form/signup?type=freshmen" class="mr-1 button-red">Freshmen</b-button>
           <b-button squared to="/form/upperclassmen" class="ml-1" variant="dark">Upperclassmen</b-button>
         </div>
-        <b-link class="mt-3" to="/admin-login">Admin Login</b-link>
+        <b-link class="mt-3" to="/login">Admin Login</b-link>
       </b-col>
     </b-row>
   </b-container>

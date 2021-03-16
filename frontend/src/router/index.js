@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import FormSenior from '@/views/FormSenior';
 import FormFreshmen from '@/views/FormFreshmen';
 import AdminLogin from '@/views/AdminLogin';
+import AdminPanel from "@/views/AdminPanel";
 import PageNotFound from '@/views/PageNotFound';
 
 Vue.use(VueRouter)
@@ -25,9 +26,14 @@ const routes = [
     component: FormFreshmen
   },
   {
-    path: '/admin-login',
+    path: '/login',
     name: 'AdminLogin',
     component: AdminLogin
+  },
+  {
+    path: '/admin',
+    name: 'AdminPanel',
+    component: AdminPanel
   },
   {
     path: '*',
