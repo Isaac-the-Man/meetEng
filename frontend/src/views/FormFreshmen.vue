@@ -2,7 +2,7 @@
   <b-container>
     <b-row>
       <b-col>
-        <h1>Prospective/Freshmen Sign Up</h1>
+        <h1>Prospective / Freshmen Sign Up</h1>
         <hr>
         <b-form>
           <b-form-group label="I'm:" label-for="input-freshmen-type" v-slot="{ ariaDescribedby }">

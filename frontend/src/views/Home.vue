@@ -11,10 +11,10 @@
         <p>
           Fill out a form to participate!
         </p>
-        <div>
-          <b-button squared to="/form/signup?type=prospective" class="mr-1 button-red">Prospective Students</b-button>
-          <b-button squared to="/form/signup?type=freshmen" class="mr-1 button-red">Freshmen</b-button>
-          <b-button squared to="/form/upperclassmen" class="ml-1" variant="dark">Upperclassmen</b-button>
+        <div class="d-flex flex-wrap justify-content-center">
+          <b-button squared to="/form/signup?type=prospective" class="mr-1 button-red mt-1">Prospective Students</b-button>
+          <b-button squared to="/form/signup?type=freshmen" class="mr-1 button-red mt-1">Freshmen</b-button>
+          <b-button squared to="/form/upperclassmen" class="ml-1" variant="dark mt-1">Upperclassmen</b-button>
         </div>
         <b-link class="mt-3" to="/login">Admin Login</b-link>
       </b-col>
