@@ -8,13 +8,23 @@
         </div>
         <b-card class="mt-3 shadow">
           <b-card-body>
-            <b-card-title>Admin Login</b-card-title>
+            <b-card-title class="text-center">Admin Login</b-card-title>
             <b-form>
-              <b-form-group label="Username: " label-for="input-login-user">
-                <b-form-input v-model="user" id="input-login-user" type="text" required></b-form-input>
+              <b-form-group label-for="input-login-user">
+                <b-input-group>
+                  <b-input-group-prepend is-text>
+                    <b-icon-person></b-icon-person>
+                  </b-input-group-prepend>
+                  <b-form-input v-model="user" placeholder="Username" id="input-login-user" type="text" required></b-form-input>
+                </b-input-group>
               </b-form-group>
-              <b-form-group label="Password: " label-for="input-login-pass">
-                <b-form-input v-model="pass" id="input-login-pass" type="password" required></b-form-input>
+              <b-form-group label-for="input-login-pass">
+                <b-input-group>
+                  <b-input-group-prepend is-text>
+                    <b-icon-lock></b-icon-lock>
+                  </b-input-group-prepend>
+                  <b-form-input v-model="pass" placeholder="Password" id="input-login-pass" type="password" required></b-form-input>
+                </b-input-group>
               </b-form-group>
               <b-button class="button-red" type="submit" block squared>Submit</b-button>
             </b-form>
@@ -29,8 +39,14 @@
 </template>
 
 <script>
+import {BIconPerson, BIconLock} from "bootstrap-vue"
+
 export default {
   name: "AdminLogin",
+  components: {
+    BIconLock,
+    BIconPerson
+  },
   data() {
     return {
       user: '',
