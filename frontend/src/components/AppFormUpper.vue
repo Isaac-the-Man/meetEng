@@ -37,6 +37,7 @@
             <app-time-block-picker @count="writeCount" @data="writeData" :display="formData.availability"
                                    id="input-upper-timeblocks"></app-time-block-picker>
           </b-form-group>
+          <b-button class="button-red" block squared type="submit">{{submitTitle}}</b-button>
         </b-form>
         <pre>{{ formData }}</pre>
       </b-col>
@@ -53,6 +54,10 @@ export default {
   props: {
     formData: {
       type: Object,
+      required: true
+    },
+    submitTitle: {
+      type: String,
       required: true
     }
   },

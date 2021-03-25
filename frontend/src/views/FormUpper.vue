@@ -4,7 +4,7 @@
       <b-col>
         <h1>Upperclassmen Sign Up</h1>
         <hr>
-        <app-form-upper :form-data="formData"></app-form-upper>
+        <app-form-upper submit-title="Submit" :form-data="formData"></app-form-upper>
       </b-col>
     </b-row>
   </b-container>

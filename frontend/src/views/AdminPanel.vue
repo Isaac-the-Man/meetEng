@@ -8,7 +8,7 @@
         <app-matching-status></app-matching-status>
         <!-- data tabs -->
         <div class="mt-3">
-          <b-tabs content-class="mt-3">
+          <b-tabs pills content-class="mt-3">
             <b-tab title="Prospectives / Freshmen" active>
               <app-edit-freshmen-table></app-edit-freshmen-table>
             </b-tab>

@@ -4,7 +4,7 @@
       <b-col>
         <h1>Prospective / Freshmen Sign Up</h1>
         <hr>
-        <app-form-fresh :form-data="formData"></app-form-fresh>
+        <app-form-fresh submit-title="Submit" :form-data="formData"></app-form-fresh>
         <pre>{{ formData }}</pre>
       </b-col>
     </b-row>

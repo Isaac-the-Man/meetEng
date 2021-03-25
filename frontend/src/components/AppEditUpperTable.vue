@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- Modal -->
-    <b-modal no-close-on-backdrop no-close-on-esc cancel-title="Cancel" ok-title="Save" v-model="editShow" size="lg" title="Edit Form">
-      <app-form-upper :form-data="items[editIndex]"></app-form-upper>
+    <b-modal hide-footer v-model="editShow" size="lg" title="Edit Form">
+      <app-form-upper submit-title="Update" :form-data="items[editIndex]"></app-form-upper>
     </b-modal>
     <!-- filter -->
     <b-form class="shadow">
