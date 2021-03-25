@@ -2,25 +2,23 @@
   <b-container>
     <b-row>
       <b-col>
-        <h1>Prospective / Freshmen Sign Up</h1>
+        <h1>Upperclassmen Sign Up</h1>
         <hr>
-        <app-form-fresh :form-data="formData"></app-form-fresh>
-        <pre>{{ formData }}</pre>
+        <app-form-upper :form-data="formData"></app-form-upper>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import AppFormFresh from "@/components/AppFormFresh";
+import AppFormUpper from "@/components/AppFormUpper";
 
 export default {
-  name: "FormFreshmen",
-  components: {AppFormFresh},
+  name: "FormSenior",
+  components: {AppFormUpper},
   data() {
     return {
       formData: {
-        type: 'prospective',
         firstName: '',
         lastName: '',
         mail: '',
@@ -30,12 +28,6 @@ export default {
         hometown: '',
         availability: {}
       }
-    }
-  },
-  created() {
-    // change type, default is prospective
-    if (this.$route.query.type === 'freshmen') {
-      this.formData.type = 'freshmen'
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="table table-sm table-bordered">
+    <b-table-simple class="table table-sm table-bordered overflow-hidden">
       <thead class="bg-dark text-white">
       <tr>
         <th class="same-width" scope="col"></th>
@@ -11,13 +11,13 @@
       <tr v-for="(time, i) in timeBlocks" :key="i">
         <th class="same-width bg-dark text-white" scope="row">{{ time }}</th>
         <td @click="registerBlock(day ,i)"
-            :class="['same-width', 'text-center', {'block-booked': blocks[day][i], 'block-empty': !blocks[day][i]}]"
+            :class="['same-width', 'text-center', {'block-booked': blocks[day.toLowerCase()][i], 'block-empty': !blocks[day.toLowerCase()][i]}]"
             v-for="(day, j) in fields" :key="j" role="button">
-          <b-icon-check-circle class="text-white" v-if="blocks[day][i]"></b-icon-check-circle>
+          <b-icon-check-circle class="text-white" v-if="blocks[day.toLowerCase()][i]"></b-icon-check-circle>
         </td>
       </tr>
       </tbody>
-    </table>
+    </b-table-simple>
   </div>
 </template>
 
@@ -30,6 +30,11 @@ export default {
   components: {
     BIconCheckCircle
   },
+  props: {
+    display: {
+      required: false
+    }
+  },
   data() {
     return {
       granularity: 30,  // length of each time block in minutes
@@ -39,13 +44,13 @@ export default {
       endMin: 0,
       fields: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       blocks: {
-        Mon: {},
-        Tue: {},
-        Wed: {},
-        Thu: {},
-        Fri: {},
-        Sat: {},
-        Sun: {}
+        mon: {},
+        tue: {},
+        wed: {},
+        thu: {},
+        fri: {},
+        sat: {},
+        sun: {}
       }
     }
   },
@@ -63,7 +68,7 @@ export default {
       return count
     },
     output() {
-      // format output to dictionary of bit arrays
+      // format output to Object of bit arrays
       const formatted = {};
       Object.entries(this.blocks).forEach(([key, value]) => {
         let arr = [];
@@ -93,11 +98,17 @@ export default {
     }
   },
   methods: {
-    registerBlock(day, i) {
-      // book/unbook a time block
-      this.blocks[day][i] = !this.blocks[day][i]
+    fillProps() {
+      // update props with value
       this.$emit('data', this.output)
       this.$emit('count', this.selectCount)
+    },
+    registerBlock(day, i) {
+      // book/unbook a time block
+      console.log('register day ' + day + i)
+      console.log(this.blocks[day.toLowerCase()][i])
+      this.blocks[day.toLowerCase()][i] = !this.blocks[day.toLowerCase()][i]
+      this.fillProps()
     },
     loadBlocks() {
       // fill in empty bit array of blocks
@@ -106,12 +117,26 @@ export default {
         for (let j = 0; j < this.timeBlocks.length; ++j) {
           arr[j] = false
         }
-        this.blocks[day] = arr
+        this.blocks[day.toLowerCase()] = arr
+      })
+    },
+    loadDisplay() {
+      // format input to Object
+      Object.keys(this.display).forEach((key) => {
+        this.display[key].forEach(((value, index) => {
+          this.blocks[key][index] = value
+        }))
       })
     }
   },
   created() {
     this.loadBlocks()
+    // Check if display exists and not empty
+    if (this.display && Object.keys(this.display).length > 0) {
+      this.loadDisplay()
+    }
+    // reload
+    this.fillProps()
   }
 }
 </script>
@@ -127,10 +152,6 @@ export default {
 
 .same-width {
   width: 12.5%;
-}
-
-table {
-  overflow: hidden;
 }
 
 tbody tr:hover {

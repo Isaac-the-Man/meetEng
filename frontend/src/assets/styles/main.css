@@ -14,3 +14,6 @@
     max-width: 160px;
     max-height: 160px;
 }
+.bg-red {
+    background-color: #d6001c !important;
+}

@@ -2,44 +2,41 @@
   <b-container>
     <b-row>
       <b-col>
-        <h1>Upperclassmen Sign Up</h1>
-        <hr>
         <b-form>
-          <b-form-group label="First Name:" label-for="input-senior-firstname">
-            <b-form-input v-model="formData.firstName" id="input-senior-firstname" required></b-form-input>
+          <b-form-group label="First Name:" label-for="input-upper-firstname">
+            <b-form-input v-model="formData.firstName" id="input-upper-firstname" required></b-form-input>
           </b-form-group>
-          <b-form-group label="Last Name:" label-for="input-senior-lastname">
-            <b-form-input v-model="formData.lastName" id="input-senior-lastname" required></b-form-input>
+          <b-form-group label="Last Name:" label-for="input-upper-lastname">
+            <b-form-input v-model="formData.lastName" id="input-upper-lastname" required></b-form-input>
           </b-form-group>
-          <b-form-group label="RPI Mail:" label-for="input-senior-mail">
-            <b-form-input v-model="formData.mail" id="input-senior-mail" type="email" required></b-form-input>
+          <b-form-group label="Mail:" label-for="input-upper-mail">
+            <b-form-input v-model="formData.mail" id="input-upper-mail" type="email" required></b-form-input>
           </b-form-group>
-          <b-form-group label="Gender:" label-for="input-senior-gender">
-            <b-form-select v-model="formData.gender" id="input-senior-gender" :options="genderOptions"
+          <b-form-group label="Gender:" label-for="input-upper-gender">
+            <b-form-select v-model="formData.gender" id="input-upper-gender" :options="genderOptions"
                            required></b-form-select>
           </b-form-group>
-          <b-form-group label="Majors:" label-for="input-senior-majors" v-slot="{ ariaDescribedby }">
+          <b-form-group label="(Intended) Majors:" label-for="input-upper-majors" v-slot="{ ariaDescribedby }">
             <b-form-checkbox-group
                 v-model="formData.majors"
-                id="input-senior-majors"
+                id="input-upper-majors"
                 :options="majorsOptions"
                 :aria-describedby="ariaDescribedby"
                 name="majors-list"
             ></b-form-checkbox-group>
           </b-form-group>
-          <b-form-group label="Hometown:" label-for="input-senior-hometown">
-            <b-form-checkbox @change="clearHome" id="input-senior-international" v-model="formData.isInternational"
+          <b-form-group label="Hometown:" label-for="input-upper-hometown">
+            <b-form-checkbox @change="clearHome" id="input-upper-international" v-model="formData.isInternational"
                              required>
               I am an International Student (non US students)
             </b-form-checkbox>
-            <b-form-select class="mt-1" v-model="formData.hometown" id="input-senior-hometown"
+            <b-form-select class="mt-1" v-model="formData.hometown" id="input-upper-hometown"
                            :options="homeOptions" required></b-form-select>
           </b-form-group>
-          <b-form-group label="Time Blocks:" label-for="input-senior-timeblocks">
-            <app-time-block-picker @count="writeCount" @data="writeData"
-                                   id="input-senior-timeblocks"></app-time-block-picker>
+          <b-form-group label="Time Blocks:" label-for="input-upper-timeblocks">
+            <app-time-block-picker @count="writeCount" @data="writeData" :display="formData.availability"
+                                   id="input-upper-timeblocks"></app-time-block-picker>
           </b-form-group>
-          <b-button squared class="button-red" block type="submit">Submit</b-button>
         </b-form>
         <pre>{{ formData }}</pre>
       </b-col>
@@ -51,21 +48,21 @@
 import AppTimeBlockPicker from "@/components/AppTimeBlockPicker";
 
 export default {
-  name: "FormSenior",
+  name: "AppFormUpper",
   components: {AppTimeBlockPicker},
+  props: {
+    formData: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       blocksCount: 0,
-      formData: {
-        firstName: '',
-        lastName: '',
-        mail: '',
-        gender: '',
-        majors: [],
-        isInternational: false,
-        hometown: '',
-        availability: {}
-      },
+      typeOptions: [
+        {text: 'a Prospective Student', value: 'prospective'},
+        {text: 'a Freshmen', value: 'freshmen'}
+      ],
       genderOptions: [
         {text: 'Please select an option', value: ''},
         {text: 'Male', value: 'm'},
