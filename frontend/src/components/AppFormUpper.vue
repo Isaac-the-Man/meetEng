@@ -2,7 +2,7 @@
   <b-container>
     <b-row>
       <b-col>
-        <b-form>
+        <b-form @submit="validateForm">
           <b-form-group label="First Name:" label-for="input-upper-firstname">
             <b-form-input v-model="formData.firstName" id="input-upper-firstname" required></b-form-input>
           </b-form-group>
@@ -16,7 +16,7 @@
             <b-form-select v-model="formData.gender" id="input-upper-gender" :options="genderOptions"
                            required></b-form-select>
           </b-form-group>
-          <b-form-group label="(Intended) Majors:" label-for="input-upper-majors" v-slot="{ ariaDescribedby }">
+          <b-form-group label="Majors (at most 2):" label-for="input-upper-majors" v-slot="{ ariaDescribedby }">
             <b-form-checkbox-group
                 v-model="formData.majors"
                 id="input-upper-majors"
@@ -39,6 +39,15 @@
           </b-form-group>
           <b-button class="button-red" block squared type="submit">{{submitTitle}}</b-button>
         </b-form>
+        <!-- alert -->
+        <b-alert
+            v-model="showAlert"
+            class="position-fixed fixed-top m-0 rounded-0"
+            style="z-index: 2000;"
+            variant="danger"
+            dismissible>
+          {{ alertText }}
+        </b-alert>
         <pre>{{ formData }}</pre>
       </b-col>
     </b-row>
@@ -63,6 +72,8 @@ export default {
   },
   data() {
     return {
+      showAlert: false,
+      alertText: '',
       blocksCount: 0,
       typeOptions: [
         {text: 'a Prospective Student', value: 'prospective'},
@@ -413,6 +424,21 @@ export default {
     }
   },
   methods: {
+    validateForm(evt) {
+      evt.preventDefault();
+      // at least 1 block should be selected
+      if (this.blocksCount < 1) {
+        this.alertText = "At least 1 time block should be selected."
+        this.showAlert = true
+        return;
+      }
+      if (this.formData.majors.length > 2) {
+        this.alertText = "You can only select up to 2 majors."
+        this.showAlert = true
+        return;
+      }
+      this.$emit("validateSuccess")  // validate success
+    },
     clearHome() {
       this.formData.hometown = ''
     },

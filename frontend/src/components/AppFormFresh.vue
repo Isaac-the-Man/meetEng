@@ -2,7 +2,7 @@
   <b-container>
     <b-row>
       <b-col>
-        <b-form>
+        <b-form @submit="validateForm">
           <b-form-group label="I'm:" label-for="input-freshmen-type" v-slot="{ ariaDescribedby }">
             <b-form-radio-group id="input-freshmen-type" v-model="formData.type" :options="typeOptions"
                                 :aria-describedby="ariaDescribedby" name="type-list" required
@@ -21,7 +21,8 @@
             <b-form-select v-model="formData.gender" id="input-freshmen-gender" :options="genderOptions"
                            required></b-form-select>
           </b-form-group>
-          <b-form-group label="(Intended) Majors:" label-for="input-freshmen-majors" v-slot="{ ariaDescribedby }">
+          <b-form-group label="Intended Majors (at most 2):" label-for="input-freshmen-majors"
+                        v-slot="{ ariaDescribedby }">
             <b-form-checkbox-group
                 v-model="formData.majors"
                 id="input-freshmen-majors"
@@ -42,8 +43,17 @@
             <app-time-block-picker @count="writeCount" @data="writeData" :display="formData.availability"
                                    id="input-freshmen-timeblocks"></app-time-block-picker>
           </b-form-group>
-          <b-button class="button-red" block squared type="submit">{{submitTitle}}</b-button>
+          <b-button class="button-red" block squared type="submit">{{ submitTitle }}</b-button>
         </b-form>
+        <!-- alert -->
+        <b-alert
+            v-model="showAlert"
+            class="position-fixed fixed-top m-0 rounded-0"
+            style="z-index: 2000;"
+            variant="danger"
+            dismissible>
+          {{ alertText }}
+        </b-alert>
         <pre>{{ formData }}</pre>
       </b-col>
     </b-row>
@@ -68,6 +78,8 @@ export default {
   },
   data() {
     return {
+      showAlert: false,
+      alertText: '',
       blocksCount: 0,
       typeOptions: [
         {text: 'a Prospective Student', value: 'prospective'},
@@ -418,6 +430,21 @@ export default {
     }
   },
   methods: {
+    validateForm(evt) {
+      evt.preventDefault();
+      // at least 1 block should be selected
+      if (this.blocksCount < 1) {
+        this.alertText = "At least 1 time block should be selected."
+        this.showAlert = true
+        return;
+      }
+      if (this.formData.majors.length > 2) {
+        this.alertText = "You can only select up to 2 majors."
+        this.showAlert = true
+        return;
+      }
+      this.$emit("validateSuccess")  // validate success
+    },
     clearHome() {
       this.formData.hometown = ''
     },
