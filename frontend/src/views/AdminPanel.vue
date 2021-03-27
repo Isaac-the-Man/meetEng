@@ -2,7 +2,10 @@
   <b-container>
     <b-row>
       <b-col>
-        <h1>Admin Panel</h1>
+        <div class="d-flex justify-content-between align-items-baseline">
+          <h1>Admin Panel</h1>
+          <b-link>Log Out</b-link>
+        </div>
         <hr>
         <!-- Status Bar -->
         <app-matching-status></app-matching-status>
