@@ -6,7 +6,7 @@ const db = require('./modules/db.js');
 const apiRouter = require('./modules/api.js')(db);
 
 const app = express();
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('Nothing to see here :eyes:');
 });
 
