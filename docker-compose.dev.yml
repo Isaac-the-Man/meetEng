@@ -23,6 +23,7 @@ services:
       - "3000:3000"
     volumes:
       - "./backend/main.js:/app/main.js"
+      - "./backend/main.js:/app/db.js"
       - "./backend/config.json:/app/config.json"
   db:
     image: "mongo"
