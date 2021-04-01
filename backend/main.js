@@ -1,13 +1,17 @@
 'use strict';
 
-const config = require('./config.json');
-
 const express = require('express');
+const config = require('./config.json');
+const db = require('./modules/db.js');
+const apiRouter = require('./modules/api.js')(db);
 
 const app = express();
 app.get('/', (req, res) => {
-  res.send('Hello World');
+  res.send('Nothing to see here :eyes:');
 });
 
-app.listen(config.PORT, config.HOST);
-console.log(`Running on http://${config.HOST}:${config.PORT}`);
+app.use('/api/form', apiRouter);
+
+app.listen(config.PORT, config.HOST, () => {
+    console.log(`Running on http://${config.HOST}:${config.PORT}`);
+});
