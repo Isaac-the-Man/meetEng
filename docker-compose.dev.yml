@@ -7,6 +7,9 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 7655:80
+    networks:
+      - frontend
+      - backend
   frontend:
     build:
       context: "frontend"
@@ -21,6 +24,8 @@ services:
     volumes:
       - "./frontend/public:/app/public"
       - "./frontend/src:/app/src"
+    networks:
+      - frontend
   backend:
     build:
       context: "backend"
@@ -30,9 +35,11 @@ services:
       - "3000:3000"
     volumes:
       - "./backend/main.js:/app/main.js"
-      - "./backend/modules/db.js:/app/modules/db.js"
-      - "./backend/modules/api.js:/app/modules/api.js"
       - "./backend/config.json:/app/config.json"
+      - "./backend/modules:/app/modules"
+      - "./backend/models:/app/models"
+    networks:
+      - backend
   db:
     image: "mongo"
     restart: unless-stopped
@@ -41,8 +48,16 @@ services:
     volumes:
       - mongodata:/data/db
       - mongoconfig:/data/configdb
+    networks:
+      - backend
 volumes:
   mongodata:
     external: false
   mongoconfig:
     external: false
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
