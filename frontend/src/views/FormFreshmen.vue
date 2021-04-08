@@ -4,7 +4,7 @@
       <b-col>
         <h1>Prospective / Freshmen Sign Up</h1>
         <hr>
-        <app-form-fresh submit-title="Submit" :form-data="formData"></app-form-fresh>
+        <app-form-fresh @validateSuccess="submitFresh" submit-title="Submit" :form-data="formData"></app-form-fresh>
         <pre>{{ formData }}</pre>
       </b-col>
     </b-row>
@@ -13,6 +13,7 @@
 
 <script>
 import AppFormFresh from "@/components/AppFormFresh";
+import axios from "axios";
 
 export default {
   name: "FormFreshmen",
@@ -30,6 +31,16 @@ export default {
         hometown: '',
         availability: {}
       }
+    }
+  },
+  methods: {
+    async submitFresh() {
+      try {
+        await axios.post('/api/form/freshmen', this.formData)
+      } catch (e) {
+        console.log(e);
+      }
+      console.log('submit success');
     }
   },
   created() {
