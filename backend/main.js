@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const apiRouter = require('./modules/api.js')(db);
 const userRouter = require('./modules/users');
+const authRouter = require('./modules/auth');
 
 const app = express();
 
@@ -35,6 +36,8 @@ app.get('/api', (req, res) => {
 app.use('/api/form', apiRouter);
 
 app.use('/api/user', userRouter);
+
+app.use('/api/auth', authRouter);
 
 app.listen(config.PORT, config.HOST, () => {
     console.log(`Running on http://${config.HOST}:${config.PORT}`);

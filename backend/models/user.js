@@ -1,7 +1,16 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
+const jwt = require('jsonwebtoken');
+const config = require('../config.json');
 
-const User =  mongoose.model('User', new mongoose.Schema({
+
+// check if private key exists
+if (!config.jwtPrivateKey) {
+    console.error('FATAL ERROR: jwtPrivateKey not found.');
+    process.exit(1);
+}
+
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -14,7 +23,13 @@ const User =  mongoose.model('User', new mongoose.Schema({
         minlength: 5,
         maxlength: 1024
     }
-}))
+});
+
+userSchema.methods.generateAuthToken = function() {
+    return jwt.sign({_id: this.id}, config.jwtPrivateKey);
+}
+
+const User =  mongoose.model('User', userSchema);
 
 function validateUser(user) {
     const schema = Joi.object({
