@@ -4,8 +4,7 @@
       <b-col>
         <h1>Prospective / Freshmen Sign Up</h1>
         <hr>
-        <app-form-fresh @validateSuccess="submitFresh" submit-title="Submit" :form-data="formData"></app-form-fresh>
-        <pre>{{ formData }}</pre>
+        <app-form-fresh @validateSuccess="submitUnder" submit-title="Submit" :form-data="formData"></app-form-fresh>
       </b-col>
     </b-row>
   </b-container>
@@ -34,13 +33,14 @@ export default {
     }
   },
   methods: {
-    async submitFresh() {
+    async submitUnder() {
       try {
-        await axios.post('/api/form/freshmen', this.formData)
+        await axios.post('/api/form/underclassmen', this.formData);
+        console.log('submit success');
+        this.$router.push('/landing');
       } catch (e) {
         console.log(e);
       }
-      console.log('submit success');
     }
   },
   created() {

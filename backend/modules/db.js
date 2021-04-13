@@ -26,7 +26,7 @@ exports.addUpper = (obj, r) => {
     u.save((err, u) => {
         if (err) return console.error(err);
         console.log("added: " + u);
-        r("added: " + u);
+        r.send("added: " + u);
     });
 }
 
