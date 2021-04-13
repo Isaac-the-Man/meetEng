@@ -9,7 +9,8 @@
         <b-card class="mt-3 shadow">
           <b-card-body>
             <b-card-title class="text-center">Admin Login</b-card-title>
-            <b-form>
+            <b-form @submit="login">
+              <b-alert :show="showError" variant="danger">Invalid Credentials</b-alert>
               <b-form-group label-for="input-login-user">
                 <b-input-group>
                   <b-input-group-prepend is-text>
@@ -40,6 +41,7 @@
 
 <script>
 import {BIconPerson, BIconLock} from "bootstrap-vue"
+import axios from "axios";
 
 export default {
   name: "AdminLogin",
@@ -50,7 +52,26 @@ export default {
   data() {
     return {
       user: '',
-      pass: ''
+      pass: '',
+      showError: false
+    }
+  },
+  methods: {
+    async login(evt) {
+      evt.preventDefault();
+      try {
+        const res = await axios.post('/api/auth', {name: this.user, pass: this.pass});
+        this.$store.commit('setToken', res);  // record auth token
+        this.$router.push('/admin');
+      } catch (e) {
+        this.$store.commit('clearToken');
+        this.showError = true;
+      }
+    }
+  },
+  created() {
+    if (this.$store.state.authToken != null) {
+      this.$router.push('/admin'); // auto login
     }
   }
 }

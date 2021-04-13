@@ -4,7 +4,7 @@
       <b-col>
         <div class="d-flex justify-content-between align-items-baseline">
           <h1>Admin Panel</h1>
-          <b-link>Log Out</b-link>
+          <b-link @click="logout">Log Out</b-link>
         </div>
         <hr>
         <!-- Status Bar -->
@@ -36,6 +36,17 @@ export default {
     AppMatchingStatus,
     AppEditFreshmenTable,
     AppEditUpperTable
+  },
+  methods: {
+    logout() {
+      this.$store.commit('clearToken');
+      this.$router.push('/');
+    }
+  },
+  created() {
+    if(!this.$store.state.authToken) {
+      this.$router.push('/login');  // auth guard
+    }
   }
 }
 </script>
