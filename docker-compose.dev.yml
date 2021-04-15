@@ -38,6 +38,7 @@ services:
       - "./backend/config.json:/app/config.json"
       - "./backend/modules:/app/modules"
       - "./backend/models:/app/models"
+      - "./backend/middleware:/app/middleware"
     networks:
       - backend
   db:

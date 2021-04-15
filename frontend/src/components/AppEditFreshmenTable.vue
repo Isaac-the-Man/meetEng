@@ -6,7 +6,7 @@
     </b-modal>
     <!-- filter -->
     <b-form class="shadow">
-      <b-form-group label-for="input-login-user">
+      <b-form-group label-for="input-filter">
         <b-input-group>
           <b-input-group-prepend>
             <b-form-select class="bg-light" v-model="filterOn" :options="filterOptions"></b-form-select>

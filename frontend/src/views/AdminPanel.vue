@@ -18,6 +18,9 @@
             <b-tab title="Upperclassmen">
               <app-edit-upper-table></app-edit-upper-table>
             </b-tab>
+            <b-tab title="Settings">
+              <app-change-password></app-change-password>
+            </b-tab>
           </b-tabs>
         </div>
       </b-col>
@@ -29,13 +32,15 @@
 import AppMatchingStatus from "@/components/AppMatchingStatus";
 import AppEditFreshmenTable from "@/components/AppEditFreshmenTable";
 import AppEditUpperTable from "@/components/AppEditUpperTable";
+import AppChangePassword from "@/components/AppChangePassword";
 
 export default {
   name: "AdminPanel",
   components: {
     AppMatchingStatus,
     AppEditFreshmenTable,
-    AppEditUpperTable
+    AppEditUpperTable,
+    AppChangePassword
   },
   methods: {
     logout() {

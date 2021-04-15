@@ -9,7 +9,8 @@ module.exports = function auth(req, res, next) {
         req.user = jwt.verify(token, config.jwtPrivateKey);
         next();
     } catch (e) {
+        console.log(token);
         console.log(e);
-        res.status(400).search('Invalid Token.');
+        res.status(400).send('Invalid Token.');
     }
 }
