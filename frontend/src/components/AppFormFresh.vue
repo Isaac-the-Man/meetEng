@@ -21,15 +21,25 @@
             <b-form-select v-model="formData.gender" id="input-freshmen-gender" :options="genderOptions"
                            required></b-form-select>
           </b-form-group>
-          <b-form-group label="Intended Majors (at most 2):" label-for="input-freshmen-majors"
-                        v-slot="{ ariaDescribedby }">
-            <b-form-checkbox-group
-                v-model="formData.majors"
-                id="input-freshmen-majors"
+          <b-form-group label="Intended Primary Major: " label-for="input-freshmen-primary-major" v-slot="{ ariaDescribedby }">
+            <b-form-radio-group
+                id="input-freshmen-primary-major"
+                v-model="formData.firstMajor"
                 :options="majorsOptions"
+                @change="clearSecondMajor"
                 :aria-describedby="ariaDescribedby"
-                name="majors-list"
-            ></b-form-checkbox-group>
+                name="primary-major"
+                required
+            ></b-form-radio-group>
+          </b-form-group>
+          <b-form-group label="Intended Secondary Major (optional): " label-for="input-freshmen-secondary-major" v-slot="{ ariaDescribedby }">
+            <b-form-radio-group
+                id="input-freshmen-secondary-major"
+                v-model="formData.secondMajor"
+                :options="secondaryMajorOptions"
+                :aria-describedby="ariaDescribedby"
+                name="secondary-major"
+            ></b-form-radio-group>
           </b-form-group>
           <b-form-group label="Hometown:" label-for="input-freshmen-hometown">
             <b-form-checkbox @change="clearHome" id="input-freshmen-international" v-model="formData.isInternational"
@@ -92,18 +102,18 @@ export default {
         {text: 'Non-Binary', value: 'o'}
       ],
       majorsOptions: [
-        {text: 'Aeronautical Engineering', value: 'aeronautical-engineering'},
-        {text: 'Biomedical Engineering', value: 'biomedical-engineering'},
-        {text: 'Chemical Engineering', value: 'chemical-engineering'},
-        {text: 'Civil Engineering', value: 'civil-engineering'},
-        {text: 'Computer & Systems Engineering', value: 'computer-systems-engineering'},
-        {text: 'Electrical Engineering', value: 'electrical-engineering'},
-        {text: 'Environmental Engineering', value: 'environmental-engineering'},
-        {text: 'Industrial and Management Engineering', value: 'industrial-and-management-engineering'},
-        {text: 'Materials Engineering', value: 'materials-engineering'},
-        {text: 'Mechanical Engineering', value: 'mechanical-engineering'},
-        {text: 'Nuclear Engineering', value: 'nuclear-engineering'},
-        {text: 'Undeclared Engineering', value: 'undeclared-engineering'}
+        {text: 'Aeronautical Engineering', value: 'aeronautical-engineering', disabled: false},
+        {text: 'Biomedical Engineering', value: 'biomedical-engineering', disabled: false},
+        {text: 'Chemical Engineering', value: 'chemical-engineering', disabled: false},
+        {text: 'Civil Engineering', value: 'civil-engineering', disabled: false},
+        {text: 'Computer & Systems Engineering', value: 'computer-systems-engineering', disabled: false},
+        {text: 'Electrical Engineering', value: 'electrical-engineering', disabled: false},
+        {text: 'Environmental Engineering', value: 'environmental-engineering', disabled: false},
+        {text: 'Industrial and Management Engineering', value: 'industrial-and-management-engineering', disabled: false},
+        {text: 'Materials Engineering', value: 'materials-engineering', disabled: false},
+        {text: 'Mechanical Engineering', value: 'mechanical-engineering', disabled: false},
+        {text: 'Nuclear Engineering', value: 'nuclear-engineering', disabled: false},
+        {text: 'Undeclared Engineering', value: 'undeclared-engineering', disabled: false}
       ],
       statesOptions: [
         {text: "Please select a state", value: ''},
@@ -421,6 +431,13 @@ export default {
     }
   },
   computed: {
+    secondaryMajorOptions() {
+      return this.majorsOptions.map((val) => {
+        let copy = {...val}
+        copy.disabled = val.value === this.formData.firstMajor;
+        return copy;
+      })
+    },
     homeOptions() {
       if (this.formData.isInternational) {
         return this.countryOptions
@@ -438,15 +455,13 @@ export default {
         this.showAlert = true
         return;
       }
-      if (this.formData.majors.length > 2) {
-        this.alertText = "You can only select up to 2 majors."
-        this.showAlert = true
-        return;
-      }
       this.$emit("validateSuccess")  // validate success
     },
     clearHome() {
       this.formData.hometown = ''
+    },
+    clearSecondMajor() {
+      this.formData.secondMajor = ''
     },
     writeData(data) {
       this.formData.availability = data

@@ -25,7 +25,8 @@ export default {
         lastName: '',
         mail: '',
         gender: '',
-        majors: [],
+        firstMajor: '',
+        secondMajor: '',
         isInternational: false,
         hometown: '',
         availability: {}

@@ -116,13 +116,9 @@ export default {
         {
           key: 'majors',
           label: 'Majors',
-          formatter: ((value) => {
-            let text = value[0]
-            value.slice(1, 2).forEach((key) => {
-              text += ', ' + key;
-            })
-            if (value.length > 2) text += ', ...'
-            return text
+          formatter: ((value, key, item) => {
+            if (item.secondMajor) return item.firstMajor + ', ' + item.secondMajor
+            return item.firstMajor
           })
         },
         {
@@ -156,10 +152,8 @@ export default {
           lastName: "Zheng",
           mail: "789@rpi.edu", // not neccesarily rpi mail
           gender: "m", // m,f,o (male, female, others)
-          majors: [
-            "aeronautical-engineering",
-            "chemical-engineering"
-          ], // majors, could be more than 1
+          firstMajor: 'aeronautical-engineering',
+          secondMajor: 'chemical-engineering',
           isInternational: false, // true if international student
           hometown: "TX", // list of states if in US (or country for international students)
           availability: { // bit array for every 30? min
@@ -177,10 +171,7 @@ export default {
           lastName: "Zeller",
           mail: "987@rpi.edu", // not neccesarily rpi mail
           gender: "f", // m,f,o (male, female, others)
-          majors: [
-            "chemical-engineering",
-            "nuclear-engineering"
-          ], // majors, could be more than 1
+          firstMajor: 'chemical-engineering',
           isInternational: true, // true if international student
           hometown: "TW", // list of states if in US (or country for international students)
           availability: { // bit array for every 30? min
