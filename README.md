@@ -1,5 +1,6 @@
 # MeetEng
 Prospective RPI students and freshmen meeting seniors of the same major.
+Contact: Yu-Kai "Steven" Wang (wangy80@rpi.edu)
 
 ## Running
 To start docker in development mode (with hot reload):
